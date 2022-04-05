@@ -1,0 +1,45 @@
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .err{
+        color:red;
+    }
+    .mas{
+        color:green;
+    }
+</style>
+<body style="background-color: pink;">
+    <!-- massage for change password succesfully-->
+    {% if messages %}
+        {% for message in messages %}
+          <p class="mas">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+<!-- #################### -->
+{% if atmk.non_field_errors %}
+           {% for error in form.non_field_errors %}
+             <p class="err"> {{error}} </p>
+           {% endfor %}
+        {% endif %}
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+        <!-- error  -->
+        <form action="" method="POST" novalidate>
+          {% csrf_token %}
+          {% for fm in form %}
+           {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+          {% endfor %}
+        <input type="submit" value="login">  
+    </form>
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+    <!-- sign_up button -->
+    <a href="{% url 'Signup' %}"><input type="submit" value="signup" style="margin-top: 10px;"></a>
+ <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+</html>
